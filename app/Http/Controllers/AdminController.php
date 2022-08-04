@@ -14,12 +14,26 @@ class AdminController extends Controller
    public function dashboard(){
       return view('admin.dashboard');
    }
+   public static function regions(){
+      return [
+         'ZMM',
+         'G44',
+         'KWT1',
+         'G45S',
+         'G45N1',
+         'G45N2',
+         'R&M',
+         'KWT2',
+         'LSM',
+         'HTR'
+      ];
+   }
+
     public function createRegionManager(Request $req){
          $req->validate([
             'fname'=>'required|string',
             'lname'=>'required|string',
-            'email'=>'required|email|unique:region_managers',
-            'phone'=>'integer',
+            'email'=>'required|email|unique:users',
             'region'=>'required|string'
          ]);
          $manager = User::create([
@@ -27,12 +41,16 @@ class AdminController extends Controller
             'lname'=>$req->lname,
             'email'=>$req->email,
             'phone'=>$req->phone,
-            'password'=>Hash::make($req->password)
+            'region'=>$req->region,
+            'user'=>'regional_manager',
+            'password'=>Hash::make(123456)
          ]);
          if($manager){
          return back()->with('success','Request successfull');
          }else{
-            return back()->with('error','Something went wrong while processing request');
+            return back()
+            ->withInput()
+            ->with('error','Something went wrong while processing request');
          }
     }
 

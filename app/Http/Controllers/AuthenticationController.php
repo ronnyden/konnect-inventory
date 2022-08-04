@@ -13,8 +13,8 @@ class AuthenticationController extends Controller
         if(auth()->user()->user == 'admin'){
            return redirect()->intended('admin/dashboard');
         }
-        else if(auth()->user()->user == 'sales_manager'){
-          return  redirect()->intended('/sales_manager/dashboard');
+        else if(auth()->user()->user == 'regional_manager'){
+          return  redirect()->intended('region_manager/dashboard');
         }
         else if(auth()->user()->user == 'delivery_team'){
           return   redirect()->intended('/delivery_team/dashboard');
