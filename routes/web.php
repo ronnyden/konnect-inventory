@@ -30,7 +30,7 @@ Route::post('/logout',[AuthenticationController::class,'logout']);
 // ........................Admin Routes............................
 Route::get('/admin/dashboard',[AdminController::class,'dashboard']);
 Route::get('/admin/add_user',[SuperAdmin::class,'addUser']);
-Route::get('/admin/add_region_manager',function(){ return view('admin.add_region_manager',['regions'=>AdminController::regions()]);});
+Route::get('/new_region_manager',function(){ return view('admin.add_region_manager',['regions'=>AdminController::regions()]);});
 Route::post('add_region_manager',[AdminController::class,'createRegionManager'])->name('add_region_manager');
 Route::post('/super_admin/create_user',[SuperAdmin::class,'createAdmin'])->name('create_admin');
 
@@ -38,5 +38,9 @@ Route::post('/super_admin/create_user',[SuperAdmin::class,'createAdmin'])->name(
 Route::get('/stock/new_stock',[StockController::class,'stockForm']);
 Route::post('/stock/addstock',[StockController::class,'addStock']);
 
-//.............................Region Manager Routes.......................
+//.............................Region Manager Routes...............................
 Route::get('/region_manager/dashboard',[RegionManagerController::class,'dashboard']);
+
+//............................Delivery Team.........................................
+Route::get('/add_delivery_team',[RegionManagerController::class,'add_team']);
+Route::post('/new_delivery_team',[AdminController::class,'createDeliveryPerson'])->name('new_deliveryteam');

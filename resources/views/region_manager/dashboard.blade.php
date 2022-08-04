@@ -26,36 +26,7 @@
                   aria-haspopup="true"
                   :aria-expanded="(open || isActive) ? 'true' : 'false'"
                 >
-                  <span aria-hidden="true">
-                    <svg
-                      class="w-5 h-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                      />
-                    </svg>
-                  </span>
                   <span class="ml-2 text-sm"> Dashboard </span>
-                  <span class="ml-auto" aria-hidden="true">
-                    <!-- active class 'rotate-180' -->
-                    <svg
-                      class="w-4 h-4 transition-transform transform"
-                      :class="{ 'rotate-180': open }"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </span>
                 </a>
                
               </div>
@@ -75,7 +46,7 @@
                   <span aria-hidden="true">
                     <i class="fa fa-users text-green-400"></i>
                   </span>
-                  <span class="ml-2 text-sm"> Users</span>
+                  <span class="ml-2 text-sm"> Delivery Teams</span>
                   <span aria-hidden="true" class="ml-auto">
                     <!-- active class 'rotate-180' -->
                     <svg
@@ -91,50 +62,23 @@
                   </span>
                 </a>
                 <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
-                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+              
                   <a
-                    href="#"
+                    href="{{'/add_delivery_team'}}"
                     role="menuitem"
                     class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
                   >
-                    <i class="fa fa-user-circle text-blue-400"></i>Regional Managers
+                    <i class="fa fa-plus-circle fa-2x text-blue-400"></i>New Delivery Team
                   </a>
                   <a
-                    href="#"
-                    role="menuitem"
-                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                  >
-                    <i class="fa fa-user-circle text-blue-400"></i>Delivery Teams
-                  </a>
-                </div>
-                <a
                   href="#"
-                  @click="$event.preventDefault(); open = !open"
-                  class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
-                  :class="{'bg-primary-100 dark:bg-primary': isActive || open}"
-                  role="button"
-                  aria-haspopup="true"
-                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                  role="menuitem"
+                  class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
                 >
-                  <span aria-hidden="true">
-                    <svg
-                      class="w-5 h-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                      />
-                    </svg>
-                  </span>
-                  <span class="ml-2 text-sm">Suppliers</span>
+                  <i class="fa fa-external-link-alt fa-2x text-blue-400"></i>View
                 </a>
+                </div>
+              
               </div>
 
               <!-- Pages links -->
@@ -187,15 +131,14 @@
                     href="pages/blank.html"
                     role="menuitem"
                     class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                  >
-                    Purchases
+                  ><i class="fa fa-cart-arrow-down fa-2x text-orange-300"></i><span class="ml-2">Allocations</span>
                   </a>
                   <a
                     href="pages/404.html"
                     role="menuitem"
                     class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
                   >
-                    Sales
+                  <i class="fa fa-shopping-basket fa-2x text-orange-300"></i><span class="ml-2">Sales</span>
                   </a>
                 </div>
               </div>
@@ -227,14 +170,14 @@
                   role="menuitem"
                   class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
                 >
-                  Add Stock
+                 <i class="fa fa-plus-circle fa-2x text-blue-400"></i> <span>Add Stock</span>
                 </a>
                   <a
                     href="auth/register.html"
                     role="menuitem"
                     class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
                   >
-                    Available(Stock at hand)
+                  <i class="fa fa-bale fa-2x text-blue-400"></i> <span>Available(Stock at hand)</span>
                   </a>
                   <a
                     href="auth/login.html"
@@ -250,34 +193,6 @@
               <!-- Layouts links -->
               <div x-data="{ isActive: false, open: false}">
                 <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
-                <a
-                  href="#"
-                  @click="$event.preventDefault(); open = !open"
-                  class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
-                  :class="{'bg-primary-100 dark:bg-primary': isActive || open}"
-                  role="button"
-                  aria-haspopup="true"
-                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
-                >
-                  <span aria-hidden="true">
-                    <svg
-                      class="w-5 h-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                      />
-                    </svg>
-                  </span>
-                  <span class="ml-2 text-sm">Regions</span>
-                </a>
-                
                 
             </nav>
 
@@ -963,7 +878,7 @@
                 <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                   <!-- Card header -->
                   <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Orders Per Region[Last 7 days]</h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Monthly Orders</h4>
                     <div class="flex items-center space-x-2">
                       <button
                         class="relative focus:outline-none"
@@ -990,7 +905,7 @@
                 <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                   <!-- Card header -->
                   <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Orders Per Region</h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Daily Orders[Last 7 Days]</h4>
                     <div class="flex items-center">
                       <button
                         class="relative focus:outline-none"
@@ -1027,32 +942,24 @@
                     <span class="text-sm font-medium text-gray-500 dark:text-primary">Users</span>
                   </p>
                   <!-- Chart -->
-                  <div class="relative p-4">
-                    <canvas id="activeUsersChart"></canvas>
-                  </div>
+                  
                 </div>
 
                 <!-- Line chart card -->
                 <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                   <!-- Card header -->
                   <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Line Chart</h4>
-                    <div class="flex items-center">
-                      <button
-                        class="relative focus:outline-none"
-                        x-cloak
-                        @click="isOn = !isOn; $parent.updateLineChart()"
-                      >
-                        <div
-                          class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker"
-                        ></div>
-                        <div
-                          class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                          :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }"
-                        ></div>
-                      </button>
-                    </div>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light text-centre">Product Ranks[Orders]</h4>
                   </div>
+                  <table class="table table-stripped p-4">
+                    <tr>
+                        <thead>
+                            <th>Code</th>
+                            <th>Product Name</th>
+                            <th>Orders made</th>
+                        </thead>
+                    </tr>
+                </table>
                   <!-- Chart -->
                   <div class="relative p-4 h-72">
                     <canvas id="lineChart"></canvas>

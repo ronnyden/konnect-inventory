@@ -58,21 +58,25 @@ class AdminController extends Controller
         $req->validate([
             'fname'=>'required|string',
             'lname'=>'required|string',
-            'email'=>'required|email|unique:region_managers',
-            'phone'=>'required|integer',
+            'email'=>'required|email|unique:users',
             'idnumber'=>'required',
             'region'=>'required|string'
          ]);
-          $user = DeliveryTeam::create([
+          $user = User::create([
             'fname'=>$req->fname,
             'lname'=>$req->lname,
             'email'=>$req->email,
             'idnumber'=>$req->idnumber,
             'phone'=>$req->phone,
-            'password'=>Hash::make($req->password)
+            'user'=>'delivery_team',
+            'password'=>Hash::make(123456)
           ]);
           if($user){
-            return back()->with('success','Request successfull');
+            return back()->with('success','Delivery personnel added successfully');
+          }else{
+            return back()
+            ->withInput()
+            ->with('error','Something went wrong');
           }
     }
 

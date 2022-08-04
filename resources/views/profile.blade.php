@@ -1,55 +1,45 @@
 @extends('layouts.app')
-<div class="container-fluid">
-    <div class="row vw-100 vh-100 d-flex justify-content-center align-items-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                <table id="product-table" class="table table-sm table-bordered">
-                    <thead>
-                        <th>No</th>
-                        <th>Product Name</th>
-                        <th>Stock</th>
-                        <th>Price</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Peanut Butter</td>
-                            <td>10</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Peanut Butter Chocolate</td>
-                            <td>5</td>
-                            <td>50</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Peanut Butter Chocolate Cake</td>
-                            <td>3</td>
-                            <td>100</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Peanut Butter Chocolate Cake with Kool-aid</td>
-                            <td>2</td>
-                            <td>150</td>
-                        </tr>
-                    </tbody>
-                </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@section('content')
+<table id="example" class="stripe hover table table-bordered table-striped" style="width:100%; padding-top: 1em;  padding-bottom: 1em;" class="table table-striped">
+    <thead>
+        <tr>
+            <th data-priority="1">Name</th>
+            <th data-priority="2">Position</th>
+            <th data-priority="3">Office</th>
+            <th data-priority="4">Age</th>
+            <th data-priority="5">Start date</th>
+            <th data-priority="6">Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Tiger Nixon</td>
+            <td>System Architect</td>
+            <td>Edinburgh</td>
+            <td>61</td>
+            <td>2011/04/25</td>
+            <td>$320,800</td>
+        </tr>
+
+        <!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
+
+        <tr>
+            <td>Donna Snider</td>
+            <td>Customer Support</td>
+            <td>New York</td>
+            <td>27</td>
+            <td>2011/01/25</td>
+            <td>$112,000</td>
+        </tr>
+    </tbody>
+
+</table>
+@endsection
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
-
-    $(function () {
-        $('#product-table').DataTable({
-            processing: true,
-            serverSide: false
-        });
-    });
-
-</script>
+    $(document).ready(function() {
+      $('#example').DataTable();
+  } )
+   </script>
