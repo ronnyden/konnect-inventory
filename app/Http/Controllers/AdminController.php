@@ -16,6 +16,7 @@ class AdminController extends Controller
    }
    public static function regions(){
       return [
+         'Warehouse',
          'ZMM',
          'G44',
          'KWT1',
@@ -26,6 +27,18 @@ class AdminController extends Controller
          'KWT2',
          'LSM',
          'HTR'
+      ];
+   }
+
+   public static function categories(){
+      return [
+         'Floor',
+         'Milk Products',
+         'Clothing',
+         'Meat Products',
+         'Jewelery',
+         'Grocery',
+
       ];
    }
 
@@ -67,6 +80,7 @@ class AdminController extends Controller
             'lname'=>$req->lname,
             'email'=>$req->email,
             'idnumber'=>$req->idnumber,
+            'region'=>$req->region,
             'phone'=>$req->phone,
             'user'=>'delivery_team',
             'password'=>Hash::make(123456)

@@ -17,7 +17,7 @@ class AuthenticationController extends Controller
           return  redirect()->intended('region_manager/dashboard');
         }
         else if(auth()->user()->user == 'delivery_team'){
-          return   redirect()->intended('/delivery_team/dashboard');
+          return   redirect()->intended('delivery_team/dashboard');
         
       }
 
