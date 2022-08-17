@@ -2,34 +2,28 @@
 <div class="flex h-screen antialiased">
     @include('layouts.letfbar')
     <div class="flex-1 h-full overflow-x-hidden overflow-y-auto">
-      @include('layouts.topnav')
+        @include('layouts.topnav')
     <div class="container p-3">
     <table class="cell-border table" id="example">
       <thead>
         <tr>
-          <th>Product Code</th>
-          <th>Product  Name</th>
-          <th>Brand</th>
-          <th>Quantity</th>
-          <th>Unit Cost</th>
-          <th>Available Stock</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>ID No.</th>
+          <th>Region</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-          @foreach ($products as $product )
-        <tr class="even:bg-green-400 odd:bg-green-100 even:text-white">
-          <td>{{$product->code}}</td>
-          <td>{{$product->name}}</td>
-          <td>{{$product->brand}}</td>
-          <td>{{$product->quantity.$product->units}}</td>
-          <td>{{$product->unit_cost}}</td>
-          @if($product->category == 'Grocery')
-          <td>{{$product->quantity}}</td>
-          @else
-          <td>{{$product->count}}</td>
-          @endif
-          <td><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+          @foreach ($region_managers as $manager )
+        <tr class="even:white odd:bg-gray-100 even:text-black-300">
+          <td>{{$manager->fname."  ".$manager->lname}}</td>
+          <td>{{$manager->phone}}</td>
+          <td>{{$manager->email}}</td>
+          <td>{{$manager->idnumber}}</td>
+          <td>{{$manager->region}}</td>
+          <td><button class="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
             Edit
           </button></td>
         </tr>

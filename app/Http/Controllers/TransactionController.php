@@ -12,8 +12,10 @@ class TransactionController extends Controller
         return view('transactions.allocations',['transactions'=>$this->getTransactions()]);
     }
     public function getTransactions(){
-        $transactions = DB::table('transactions')->select('date','transaction_code','count','origin','dest','product_code','user','value')
-        ->orderBy('date')
+        $transactions = DB::table('transactions')
+        ->leftJoin('products','transactions.product_code','=','products.code')
+        ->select('date','transaction_code','name','brand','origin','transactions.count','dest','product_code','user','value')
+        ->orderBy('date','asc')
         ->get();
         if ($transactions){
             return $transactions;

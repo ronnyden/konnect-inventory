@@ -45,6 +45,7 @@ Route::post('/stock/add_stock',[StockController::class,'addStock']);
 
 //.............................Region Manager Routes...............................
 Route::get('/region_manager/dashboard',[RegionManagerController::class,'dashboard']);
+Route::get('/regions/managers',[RegionManagerController::class,'viewRegionManagers']);
 
 //............................Delivery Team.........................................
 Route::get('/add_delivery_team',[RegionManagerController::class,'add_team']);
@@ -60,7 +61,16 @@ Route::get('/products/all_products',function(){
 Route::get('/products/add_product',function(){
     return view('products.new_product',[
         'products'=>ProductsController::getProducts(),
-        'categories'=>AdminController::categories()
+        'categories'=>AdminController::categories(),
+        'units'=>ProductsController::getUnits()
+    ]);
+});
+
+Route::get('/products/addto_product',function(){
+    return view('products.existing_product',[
+        'products'=>ProductsController::getProducts(),
+        'categories'=>AdminController::categories(),
+        'units'=>ProductsController::getUnits()
     ]);
 });
 Route::get('/products/allocate',function(){

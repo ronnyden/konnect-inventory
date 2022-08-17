@@ -6,11 +6,39 @@
         <div x-data="{ isActive: true, open: true}">
           <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
           
-            <span aria-hidden="true">
-              <i class="fa fa-user-circle fa-2x"></i>
-            </span>
-            <span class="ml-2 text-bold text-indigo-300"> DASHBOARD </span>
-          </a>
+           
+              
+            
+            <span class="ml-2 text-bold text-indigo-300">
+              @if (Auth::user()->user == 'admin')
+              <a
+              href="{{'/admin/dashboard'}}"
+              class="block 
+                     p-2 
+                     text-sm 
+                     text-blue-600 
+                     transition-colors 
+                     duration-200 
+                     rounded-md 
+                     dark:text-gray-400 
+                     dark:hover:text-light 
+                     hover:text-gray-700"> DASHBOARD </a>
+              @endif
+              @if (Auth::user()->user == 'regional_manager')
+             <a href="{{'/admin/dashboard'}}"
+              class="block 
+                     p-2 
+                     text-sm 
+                     text-blue-600 
+                     transition-colors 
+                     duration-200 
+                     rounded-md 
+                     dark:text-gray-400 
+                     dark:hover:text-light 
+                     hover:text-gray-700"> DASHBOARD </span>
+              </a>
+              @endif
+          
          
         </div>
 
@@ -56,14 +84,65 @@
               <i class="fa fa-user-circle text-blue-400"></i><span class="ml-2"></span> Add New
             </a>
             <a
-              href="#"
+              href="{{'/regions/managers'}}"
               role="menuitem"
               class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
             >
               <i class="fa fa-user-circle text-blue-400"></i>View
             </a>
           </div>
+
+          {{-- Suppliers --}}
+          <div x-data="{ isActive: false, open: false }">
+            <!-- active classes 'bg-primary-100 dark:bg-primary' -->
+            <a
+              
+              @click="$event.preventDefault(); open = !open"
+              class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
+              :class="{ 'bg-primary-100 dark:bg-primary': isActive || open }"
+              role="button"
+              aria-haspopup="true"
+              :aria-expanded="(open || isActive) ? 'true' : 'false'"
+            >
+              <span aria-hidden="true">
+                <i class="fa fa-users text-green-400"></i>
+              </span>
+              <span class="ml-2 text-bold"> Suppliers</span>
+              <span aria-hidden="true" class="ml-auto">
+                <!-- active class 'rotate-180' -->
+                <svg
+                  class="w-4 h-4 transition-transform transform"
+                  :class="{ 'rotate-180': open }"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </a>
+            <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
+              <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+              <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+              <a
+                href="{{'/add_delivery_team'}}"
+                role="menuitem"
+                class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+              >
+                <i class="fa fa-user-circle text-blue-400"></i><span class="ml-2"></span> Add New
+              </a>
+              <a
+                href="{{'/deliveryteam/all'}}"
+                role="menuitem"
+                class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+              >
+                <i class="fa fa-user-circle text-blue-400"></i>View
+              </a>
+            </div>
+        </div>
           @endif
+          {{-- Delivery Team --}}
           <div x-data="{ isActive: false, open: false }">
             <!-- active classes 'bg-primary-100 dark:bg-primary' -->
             <a
@@ -149,8 +228,15 @@
               role="menuitem"
               class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
             >
-              <i class="fa fa-user-circle text-blue-400"></i><span class="ml-2"></span> Add New
+              <i class="fa fa-user-circle text-blue-400"></i><span class="ml-2"></span> Add New Product
             </a>
+          <a
+          href="{{'/products/addto_product'}}"
+          role="menuitem"
+          class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+          >
+          <i class="fa fa-user-circle text-blue-400"></i><span class="ml-2"></span> Add to Existing Product
+        </a>
             <a
               href="{{'/products/all_products'}}"
               role="menuitem"

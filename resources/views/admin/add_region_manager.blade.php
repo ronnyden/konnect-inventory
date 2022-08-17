@@ -1,5 +1,9 @@
 @extends('layouts.app')
-<div class="bg-grey-light min-h-screen flex flex-col">
+ <div class="flex h-screen antialiased text-gray-900 bg-gray-100 dark:bg-dark dark:text-light">
+    @include('layouts.letfbar')
+    <div class="flex-1  h-full overflow-x-hidden overflow-y-auto">
+        @include('layouts.topnav')
+<div class="bg-grey-light min-h-screen flex  conyainer">
    <div class="container w-full max-w-lg flex-col mx-auto flex-1 flex  items-center justify-center px-2">
        <div class="bg-white px-6 py-8 rounded shadow-md border-top-green-400 text-black w-full">
            <h1 class="mb-8 text-3xl text-center">New Regional Manager</h1>
@@ -80,7 +84,7 @@
                      </button>
            </form>
        </div>
-
-       
    </div>
+</div>
+</div>
 </div>

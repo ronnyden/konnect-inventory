@@ -26,6 +26,7 @@
       >
         Konnect Inventory
       </a>
+      <span class="inline-block text-2xl font-bold tracking-wider uppercase text-green-300 dark:text-light">{{Auth::user()->region}} Region</span>
 
       <!-- Mobile sub menu button -->
       <button

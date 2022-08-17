@@ -10,8 +10,8 @@
             <h5 class="font-bold">{{session()->get('success')}}</h5>
         </div>
         @else
-        <div class="card-header text-center bg-green-800 p-3">  
-            <h5 class="font-bold text-white">New Product</h5>
+        <div class="card-header text-center bg-green-800 p-3">
+            <h5 class="font-bold text-white uppercase">Add to Stock</h5>
         </div>
         @endif
     <form action="{{route('new_product')}}" method="POST">
@@ -40,39 +40,40 @@
         </select>
          </div>
          <div class="flex p-2 ml-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">UNITS <span class="text-red-400 font-bold">*</span></label>
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">UNITS</label>
             <select  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="units">
-                @foreach ($units  as $unit )
+                @foreach ($units as $unit )
                     <option value="{{$unit}}">{{$unit}}</option>
                 @endforeach
-                
               </select>
          </div>
      </div>
      <div class="flex p-4 justify-items-center">
         <div class="flex">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Product Name <span class="text-red-400 font-bold">*</span></label>
-            <input type="text" class="form-control
-            block
-            w-full
-            px-3
-            py-1.5
-            text-base
-            font-normal
-            text-gray-700
-            bg-white bg-clip-padding
-            border border-solid border-gray-300
-            rounded
-            transition
-            ease-in-out
-            m-0
-            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
-            name="product_name"
-             placeholder="Product name">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">CHOOSE PRODUCT</label>
+            <select  class="
+            bg-gray-50 
+            border 
+            border-gray-300 
+            text-gray-900 
+            text-sm rounded-lg 
+            focus:ring-blue-500 
+            focus:border-blue-500 
+            block w-full p-2.5 
+            dark:bg-gray-700 
+            dark:border-gray-600 
+            dark:placeholder-gray-400
+            dark:text-white 
+            dark:focus:ring-blue-500 
+            dark:focus:border-blue-500" name="product">
+                      @foreach ($products as $product)
+                        <option value={{$product->name}}>{{$product->name}}</option>
+                      @endforeach
+        </select>
             
         </div>
         <div class="flex ml-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Product Brand</label>
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">choose brand</label>
             <input type="text" class="form-control
             ml-2
             block
@@ -94,35 +95,13 @@
             
         </div>
      </div>
-     <div class="flex p-4">
-        <div class="flex">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Quantity<span class="text-red-400 font-bold">*</span></label>
-            <input type="text" class="form-control
-            ml-2
-            block
-            w-full
-            px-3
-            py-1.5
-            text-base
-            font-normal
-            text-gray-700
-            bg-white bg-clip-padding
-            border border-solid border-gray-300
-            rounded
-            transition
-            ease-in-out
-            m-0
-            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
-            name="quantity"
-            placeholder="Quantity">
-            
-        </div>
+    
         <div class="flex ml-4 ">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Unit Cost <span class="text-red-400 font-bold">*</span></label>
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Unit Cost</label>
             <input type="text" class="form-control
             ml-3
             block
-            w-full
+            w-3/12
             px-3
             py-1.5
             text-base
@@ -139,12 +118,12 @@
             placeholder="unit cost of product">
             
         </div>
-        <div class="flex ml-4 ">
+        <div class="flex ml-4 mt-3">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Product count</label>
             <input type="text" class="form-control
             ml-3
             block
-            w-full
+            w-3/12
             px-3
             py-1.5
             text-base
@@ -185,7 +164,7 @@
     </form>
     </div>
     <div class="border border-white-300 mb-2"></div>
-    <div class="container">
+    <div class="container shadow-md">
         <table class="cell-border table" id="example">
             <thead>
               <tr>

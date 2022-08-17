@@ -32,12 +32,13 @@ class AdminController extends Controller
 
    public static function categories(){
       return [
-         'Floor',
-         'Milk Products',
-         'Clothing',
-         'Meat Products',
-         'Jewelery',
+         'Maize',
+         'Baking',
+         'Meat',
+         'Milk',
+         'Cooking',
          'Grocery',
+         'Laundry'
 
       ];
    }

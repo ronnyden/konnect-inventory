@@ -31,7 +31,11 @@
                                 m-0
                                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Select Region" name="region">
                       @foreach ($products as $product)
-                        <option value={{$product->code}}>{{$product->name." ".$product->brand."-".$product->quantity.$product->units}}</option>
+                        @if($product->category == 'Grocery')
+                        <option value={{$product->code}}>{{$product->name}}</option>
+                        @else
+                        <option value={{$product->code}}>{{$product->brand."-".$product->quantity.$product->units}}</option>
+                        @endif
                       @endforeach
                     </select>
                 </div>
