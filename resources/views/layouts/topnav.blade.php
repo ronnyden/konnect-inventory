@@ -26,8 +26,9 @@
       >
         Konnect Inventory
       </a>
+      @if(Auth::user()->user == 'regional_manager' || Auth::user()->user == "delivery_team")
       <span class="inline-block text-2xl font-bold tracking-wider uppercase text-green-300 dark:text-light">{{Auth::user()->region}} Region</span>
-
+      @endif
       <!-- Mobile sub menu button -->
       <button
         @click="isMobileSubMenuOpen = !isMobileSubMenuOpen"
