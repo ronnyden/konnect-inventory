@@ -11,27 +11,34 @@ class StockController extends Controller
         return view('stock.create',['categories'=>AdminController::categories()]);
     }
 
-    public function addStock(Request $req){
-        $req->validate([
-            'category'=>'required|string',
-            'product_name'=>'required',
-            'quantity'=>'required',
-            'count'=>'integer',
-            'brand'=>'string',
-        ]);
-        $product_code = $this->generateProductCode();
-
-        $stock = DB::table('products')->insert([
-            'category'=>$req->category,
-            'name'=>$req->product_name,
-            'brand'=>$req->brand,
-            'quantity'=>$req->quantity,
-            'count'=>$req->count,
-            'code'=>$product_code
-            
-        ]);
-        return back()->with('success','Product successfully added');
+    public function viewStock(){
+        if(auth()->user()->user == 'admin'){
+            $stock =$this->getAvailableStock();
+        }else{
+            $stock = $this->getStockPerRegion(auth()->user()->region);
+        }
+        return view('',['stock'=>$stock]);
     }
+
+    public function getAvailableStock(){
+        return DB::table('stock')
+                 ->leftJoin('products','stock.product_code','=','products.code')
+                 ->select('name','product_code','count')
+                 ->orderBy('count','desc')
+                 ->get();
+    }
+
+   public function getStockPerRegion($region){
+          return DB::table('stock')
+                    ->leftJoin('products','stock.product_code','=','products.code')
+                    ->select('name','product_code','count')
+                    ->where('region',$region)
+                    ->orderBy('count','desc')
+                    ->get();
+        
+   }
+
+   
 
     public function generateCategoryCode(){
           $catcode = rand(100,999);

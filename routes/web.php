@@ -42,6 +42,7 @@ Route::post('/super_admin/create_user',[SuperAdmin::class,'createAdmin'])->name(
 //........................Stock Routes.........................
 Route::get('/stock/new_stock',[StockController::class,'stockForm']);
 Route::post('/stock/add_stock',[StockController::class,'addStock']);
+Route::get('/stock/available_stock',[StockController::class,'getAvailableStock']);
 
 //.............................Region Manager Routes...............................
 Route::get('/region_manager/dashboard',[RegionManagerController::class,'dashboard']);
