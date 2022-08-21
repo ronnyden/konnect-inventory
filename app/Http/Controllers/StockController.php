@@ -22,8 +22,8 @@ class StockController extends Controller
 
     public function getAvailableStock(){
         return DB::table('stock')
-                 ->leftJoin('products','stock.product_code','=','products.code')
-                 ->select('name','product_code','count')
+                 ->join('products','stock.product_code','=','products.code')
+                 ->select('name as product','brand','region','count')
                  ->orderBy('count','desc')
                  ->get();
     }
@@ -38,8 +38,6 @@ class StockController extends Controller
         
    }
 
-   
-
     public function generateCategoryCode(){
           $catcode = rand(100,999);
           return $catcode;
@@ -52,6 +50,42 @@ class StockController extends Controller
     public function generateBarcode($product_code){
         $code = DB::table('products')->select('code')->where('code',$product_code);
          return view('profile',['barcode'=>$code]);
+
+    }
+
+    public static function getStockWorth(){
+        return DB::table('stock')->join('products','stock.product_code','=','products.code')
+                ->select('SUM(count*unit_cost) as stock_worth')
+                ->orderByDesc('stock_worth')
+                ->get();
+    }
+
+    public static function totalStockworth(){
+     $worths =   DB::table('stock')->join('products','stock.product_code','=','products.code')
+                ->select(DB::raw('SUM(count*unit_cost) as totalworth'))
+                ->get();
+    $total = 0;
+
+        foreach($worths as $worth){
+            $total = $worth->totalworth;
+        }
+    return $total;
+                
+    }
+
+    public function getStockWorthPerRegion($region){
+          return DB::table('stock')->join('products','stock.product_code','=','products.code')
+                ->select('SUM(count*unit_cost)')
+                ->where('region',$region)
+                ->get();
+
+    }
+
+    public static function getStockworthInfo(){
+        return DB::table('stock')->join('products','stock.product_code','=','products.code')
+                  ->select('region as region','name as product','brand','count',DB::raw('count*unit_cost as stock_worth')  )
+                  ->orderBy('stock_worth','desc')
+                  ->get();
 
     }
 

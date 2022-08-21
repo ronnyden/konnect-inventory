@@ -4,8 +4,8 @@
     <div class="flex-1 h-full overflow-x-hidden overflow-y-auto">
     @include('layouts.topnav')
     <div class="container p-3">
-      <div class="card-header p-3 bg-orange-300 mb-4 rounded-full w-3/12 text-center">
-        <h5 class="font-semibold">Product Allocations</h5>
+      <div class="card-header p-3 shadow-lg mb-4 rounded-full w-3/12 text-center">
+        <h5 class="font-semibold uppercase text-orange-300">Product Allocations</h5>
       </div>
     <table class="cell-border table mt-3" id="example">
       <thead>
@@ -23,7 +23,7 @@
         </tr>
       </thead>
       <tbody>
-          @foreach ($transactions as $transaction )
+          @foreach ($allocations as $transaction )
         <tr class="even:bg-green-400 odd:bg-green-100 even:text-white">
           <td>{{$transaction->date}}</td>
           <td>{{$transaction->transaction_code}}</td>

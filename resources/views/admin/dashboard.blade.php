@@ -33,7 +33,7 @@
                     >
                       Available stock worth
                     </h6>
-                    <span class="text-xl font-semibold">$30,000</span>
+                    <span class="text-xl font-semibold">{{$stockworth}}</span>
                     <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
                       +4.4%
                     </span>

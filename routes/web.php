@@ -43,6 +43,9 @@ Route::post('/super_admin/create_user',[SuperAdmin::class,'createAdmin'])->name(
 Route::get('/stock/new_stock',[StockController::class,'stockForm']);
 Route::post('/stock/add_stock',[StockController::class,'addStock']);
 Route::get('/stock/available_stock',[StockController::class,'getAvailableStock']);
+Route::get('/stock/stock_info',function(){
+     return view('stock.stock_info',['available_stock'=>StockController::getStockworthInfo()]);
+});
 
 //.............................Region Manager Routes...............................
 Route::get('/region_manager/dashboard',[RegionManagerController::class,'dashboard']);
@@ -86,3 +89,6 @@ Route::get('/barcode/{code}')->name('barcode');
  
 //........................................Transactions.............................................
 Route::get('/transactions/allocations',[TransactionController::class,'viewTransactions']);
+Route::get('/transactions/purchases',function(){
+    return view('transactions.inventory',['inventory'=>TransactionController::getInventoryTransactions()]);
+});

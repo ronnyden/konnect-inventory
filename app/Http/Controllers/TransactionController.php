@@ -16,17 +16,19 @@ class TransactionController extends Controller
         if(auth()->user()->user == 'regional_manager' || auth()->user()->user == 'delivery_team'){
             $transactions = $this->getTransactionByRegion(auth()->user()->region);
         }
-        return view('transactions.allocations',['transactions'=>$transactions]);
+        return view('transactions.allocations',[
+            'transactions'=>$transactions,
+            'allocations'=>$this->getAllocationTransactions()
+            
+        ]);
     }
     public function getAllTransactions(){
-        $transactions = DB::table('transactions')
+        return  DB::table('transactions')
         ->leftJoin('products','transactions.product_code','=','products.code')
         ->select('date','transaction_code','name','brand','origin','transactions.count','dest','product_code','user','value')
         ->orderBy('date','asc')
         ->get();
-        if ($transactions){
-            return $transactions;
-        }
+        
     }
 
     public function getTransactionByCode($code){
@@ -54,5 +56,22 @@ class TransactionController extends Controller
         return $transactions;
     }
 
+    public function getAllocationTransactions(){
+          return  DB::table('transactions')
+          ->leftJoin('products','transactions.product_code','=','products.code')
+          ->select('date','transaction_code','name','brand','origin','transactions.count','dest','product_code','user','value')
+          ->where('type','allocation')
+          ->orderBy('date','desc')
+          ->get();
+    }
+   
+    public static function getInventoryTransactions(){
+        return  DB::table('transactions')
+          ->leftJoin('products','transactions.product_code','=','products.code')
+          ->select('date','transaction_code','name','brand','origin','transactions.count','dest','product_code','user','value')
+          ->where('type','new stock')
+          ->orderBy('date','desc')
+          ->get();
+    }
 
 }

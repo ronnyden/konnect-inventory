@@ -21,7 +21,7 @@ class RegionManagerController extends Controller
         $managers = User::select('fname','lname','email','phone','region','idnumber')
                                       ->where('user','regional_manager')
                                       ->get();
-        return $managers;
+        return response()->json($managers);
     }
 
     public function viewRegionManagers(){

@@ -16,6 +16,6 @@ class DeliveryController extends Controller
                 ->where('user','delivery_team')
                 ->orderBy('fname')
                 ->get();
-        return $team;
+        return response()->json(['teams'=>$team]);
     }
 }

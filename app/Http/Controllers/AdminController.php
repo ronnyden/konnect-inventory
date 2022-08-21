@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
    public function dashboard(){
-      return view('admin.dashboard');
+      return view('admin.dashboard',['stockworth'=>StockController::totalStockworth()]);
    }
    public static function regions(){
       return [

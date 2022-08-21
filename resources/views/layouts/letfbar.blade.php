@@ -5,10 +5,6 @@
         <!-- Dashboards links -->
         <div x-data="{ isActive: true, open: true}">
           <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
-          
-           
-              
-            
             <span class="ml-2 text-bold text-indigo-300">
               @if (Auth::user()->user == 'admin')
               <a
@@ -282,7 +278,7 @@
                 />
               </svg>
             </span>
-            <span class="ml-2 text-semibold"> Transactions </span>
+            <span class="ml-2 text-semibold"> History</span>
             <span aria-hidden="true" class="ml-auto">
               <!-- active class 'rotate-180' -->
               <svg
@@ -302,25 +298,25 @@
             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
              @if(Auth::user()->user == 'admin')
             <a
-              href="#"
+              href="{{'/transactions/purchases'}}"
               role="menuitem"
               class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
             >
-              Purchases
+              Purchases History
             </a>
             <a
               href="pages/404.html"
               role="menuitem"
               class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
             >
-              Sales
+              Sales History
             </a>
             <a
             href="{{'/transactions/allocations'}}"
             role="menuitem"
                 class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
                   >
-                  <i class="fa fa-cart-arrow-down fa-2x text-orange-300"></i><span class="ml-2">Product Allocations</span>
+                  <i class="fa fa-cart-arrow-down fa-2x text-orange-300"></i><span class="ml-2">Allocations History</span>
                   </a>
             @endif
             @if(Auth::user()->user == 'regional_manager')
@@ -364,20 +360,15 @@
           <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+            @if(Auth::user()->user == 'admin')
             <a
-            href="{{'/stock/new_stock'}}"
-            role="menuitem"
-            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-          >
-            Add Stock
-          </a>
-            <a
-              href="{{'/add_stock'}}"
+              href="{{'/stock/stock_info'}}"
               role="menuitem"
               class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
             >
               Available(Stock at hand)
             </a>
+            @endif
             <a
               href="auth/login.html"
               role="menuitem"
