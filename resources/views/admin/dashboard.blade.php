@@ -9,10 +9,11 @@
           Loading.....
         </div>
 
-        <!-- Sidebar -->
-       @include('layouts.letfbar')
+       
 
         <div class="flex-1 h-full overflow-x-hidden overflow-y-auto">
+           <!-- Sidebar -->
+       @include('layouts.letfbar')
           <!-- Navbar -->
          @include('layouts.topnav')
 

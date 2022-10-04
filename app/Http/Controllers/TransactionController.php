@@ -57,13 +57,16 @@ class TransactionController extends Controller
     }
 
     public function getAllocationTransactions(){
-          return  DB::table('transactions')
+          $transactions = DB::table('transactions')
           ->leftJoin('products','transactions.product_code','=','products.code')
           ->select('date','transaction_code','name','brand','origin','transactions.count','dest','product_code','user','value')
           ->where('type','allocation')
           ->orderBy('date','desc')
           ->get();
+
+          return response()->json($transactions);
     }
+
    
     public static function getInventoryTransactions(){
         return  DB::table('transactions')

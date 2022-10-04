@@ -25,9 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login');
 });
-Route::get('/test',function(){
-    return view('profile',['categories'=>AdminController::categories()]);
-});
+Route::get('/test/{reg}',[StockController::class,'getTotalStockByRegion']);
 Route::get('/generate-barcode', [ProductController::class, 'index'])->name('generate.barcode');
 // ........................Auth Routes............................
 Route::post('/login',[AuthenticationController::class,'login'])->name('login');

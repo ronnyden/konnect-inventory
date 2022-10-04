@@ -68,32 +68,7 @@ class AdminController extends Controller
          }
     }
 
-    public function createDeliveryPerson(Request $req){
-        $req->validate([
-            'fname'=>'required|string',
-            'lname'=>'required|string',
-            'email'=>'required|email|unique:users',
-            'idnumber'=>'required',
-            'region'=>'required|string'
-         ]);
-          $user = User::create([
-            'fname'=>$req->fname,
-            'lname'=>$req->lname,
-            'email'=>$req->email,
-            'idnumber'=>$req->idnumber,
-            'region'=>$req->region,
-            'phone'=>$req->phone,
-            'user'=>'delivery_team',
-            'password'=>Hash::make(123456)
-          ]);
-          if($user){
-            return back()->with('success','Delivery personnel added successfully');
-          }else{
-            return back()
-            ->withInput()
-            ->with('error','Something went wrong');
-          }
-    }
+    
 
     public function addSupplier(Request $req){
        $req->validate([

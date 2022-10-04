@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\ProductsController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\RegionManagerController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\TransactionController;
+use App\Models\DeliveryTeam;
 use App\Models\RegionManager;
 use Illuminate\Support\Facades\Route;
 
@@ -33,57 +35,47 @@ Route::get('/', function () {
 Route::get('/test',function(){
     return view('profile',['categories'=>AdminController::categories()]);
 });
-Route::get('/generate-barcode', [ProductController::class, 'index'])->name('generate.barcode');
 // ........................Auth Routes............................
-Route::post('/login',[AuthenticationController::class,'login']);
+Route::post('/login',[AuthController::class,'login']);
 Route::post('/logout',[AuthenticationController::class,'logout']);
 // ........................Admin Routes............................
 Route::get('/admin/dashboard',[AdminController::class,'dashboard']);
 Route::get('/admin/add_user',[SuperAdmin::class,'addUser']);
 Route::get('/new_region_manager',function(){ return view('admin.add_region_manager',['regions'=>AdminController::regions()]);});
-Route::post('add_region_manager',[AdminController::class,'createRegionManager'])->name('add_region_manager');
+Route::post('/add_region_manager',[AdminController::class,'createRegionManager'])->name('add_region_manager');
 Route::post('/super_admin/create_user',[SuperAdmin::class,'createAdmin'])->name('create_admin');
 
 //........................Stock Routes.........................
 Route::get('/stock/new_stock',[StockController::class,'stockForm']);
 Route::post('/stock/add_stock',[StockController::class,'addStock']);
 Route::get('/stock/available_stock',[StockController::class,'getAvailableStock']);
-Route::get('/stock/stock_info',function(){
-     return view('stock.stock_info',['available_stock'=>StockController::getStockworthInfo()]);
-});
-
+Route::get('/stock/stock_info',[StockController::class,'getStockworthInfo']);
+Route::get('stock/total/{region}',[StockController::class,'getTotalStockByRegion']);
 //.............................Region Manager Routes...............................
-Route::get('/region_manager/dashboard',[RegionManagerController::class,'dashboard']);
-Route::get('/regions/managers',[RegionManagerController::class,'getRegionManagers']);
+Route::post('/users/new/region_admin',[RegionManagerController::class,'createRegionadmin']);
+Route::get('/users/region_admins',[RegionManagerController::class,'getRegionManagers']);
+Route::get('/users/region_admins/{id}',[RegionManagerController::class,'getRegionAdminById']);
+Route::get('/users/region_admins/{region}',[RegionManagerController::class,'getRegionAdminByRegion']);
 
 
 //............................Delivery Team.........................................
-Route::get('/add_delivery_team',[RegionManagerController::class,'add_team']);
-Route::post('/new_delivery_team',[AdminController::class,'createDeliveryPerson'])->name('new_deliveryteam');
-Route::get('/deliveryteam/all',[DeliveryController::class,'viewTeam']);
-Route::get('/delivery/teams',[DeliveryController::class,'getDeliveryTeam']);
+Route::post('/users/new/delivery_team',[DeliveryController::class,'createDeliveryPerson'])->name('new_deliveryteam');
+Route::get('/users/delivery_persons',[DeliveryController::class,'getDeliverypersons']);
+Route::get('/users/delivery_persons/{id}',[DeliveryController::class,'getDeliveryPersonById']);
+Route::delete('/users/delivery_persons/delete/{id}',[DeliveryController::class,'removeDeliveryPerson']);
 
+//............................Delivery Process.........................................
+Route::post('/order/assign',[DeliveryController::class,'assignOrder']);
+Route::get('/orders/assigned',[DeliveryController::class,'getAssignedOrders']);
 //....................Products Routes.....................................
 Route::get('/products/all_products',function(){
     return view('products.all_products',[
         'products'=>ProductsController::getProducts()
     ]);
 });
-Route::get('/products/add_product',function(){
-    return view('products.new_product',[
-        'products'=>ProductsController::getProducts(),
-        'categories'=>AdminController::categories(),
-        'units'=>ProductsController::getUnits()
-    ]);
-});
 
-Route::get('/products/addto_product',function(){
-    return view('products.existing_product',[
-        'products'=>ProductsController::getProducts(),
-        'categories'=>AdminController::categories(),
-        'units'=>ProductsController::getUnits()
-    ]);
-});
+
+
 Route::get('/products/allocate',function(){
     return view('products.allocate',[
         'products'=>ProductsController::getProducts(),
@@ -99,3 +91,4 @@ Route::get('/transactions/allocations',[TransactionController::class,'viewTransa
 Route::get('/transactions/purchases',function(){
     return view('transactions.inventory',['inventory'=>TransactionController::getInventoryTransactions()]);
 });
+Route::get('/history/allocations',[TransactionController::class,'getAllocationTransactions']);

@@ -81,12 +81,19 @@ class StockController extends Controller
 
     }
 
-    public static function getStockworthInfo(){
+    public function getStockworthInfo(){
         return DB::table('stock')->join('products','stock.product_code','=','products.code')
                   ->select('region as region','name as product','brand','count',DB::raw('count*unit_cost as stock_worth')  )
                   ->orderBy('stock_worth','desc')
                   ->get();
 
+    }
+
+    public function getTotalStockByRegion($region)
+    {
+        return DB::table('stock')->select(DB::raw('SUM(count)'))
+              ->where('region',$region)
+              ->get();
     }
 
 }
